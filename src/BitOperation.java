@@ -17,7 +17,7 @@ static public int getBitValue(long number, int nBit) {
 }
 static public long setBitValue(long number, int nBit, boolean value) {
 	int res=-1;
-	if(checkNbit(nBit)) {
+	/*if(checkNbit(nBit)) {
 		if(value==true) {
 			if(getBitValue(number,nBit)==1)	{
 				return number;
@@ -34,9 +34,19 @@ static public long setBitValue(long number, int nBit, boolean value) {
 			}
 		}
 
+	}*/
+	if(checkNbit(nBit)) {
+	if(value==true) {
+		return number | 1 << nBit;
+	}
+	else {
+		return number &~(1 << nBit);
+	}
 	}
 	return res;
+
 }
+
 static public long revertBitValue(long number,int nBit) {
 	int res=-1;
 	if(checkNbit(nBit)) {
