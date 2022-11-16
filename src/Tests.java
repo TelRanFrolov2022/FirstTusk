@@ -159,5 +159,24 @@ class Tests {
 	assertTrue(MyArrays.isOneSwapForSorted(ar7));
 	}
 
+	@Test
+	void isSum2TestTrue() {
+    short ar1[] = { 10, 2, 3, 4, 1 };
+	short ar2[] = { 1, 23, 4, 3, 5, 10 };
+	short ar3[] = { 8, 2, 4, 10, 5, 4 };
+	assertTrue(MyArrays.isSum2(ar1,(short)5));
+	assertTrue(MyArrays.isSum2(ar2,(short)28));
+	assertTrue(MyArrays.isSum2(ar3,(short)9));
+	}
+	
+	@Test
+	void isSum2TestFalse() {
+    short ar1[] = { 10, 2, 3, 4, 1 };
+	short ar2[] = { 1, 23, 4, 1, 5, 10 };
+	short ar3[] = { 8, 2, 4, 10, 5, 4 };
+	assertFalse(MyArrays.isSum2(ar1,(short)40));
+	assertFalse(MyArrays.isSum2(ar2,(short)7));
+	assertFalse(MyArrays.isSum2(ar3,(short)1));
+	}
 
 }

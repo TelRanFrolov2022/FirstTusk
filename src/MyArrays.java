@@ -106,25 +106,28 @@ public class MyArrays {
 	}
 
 	public static int[] bubbleSort(int[] array) {
-		int res[]=array;
-		if(isSorted(array)) {
-			
-		}else {boolean unsorted = true;
-		int temp;
-		while (unsorted) {
-			unsorted = false;
-			for (int i = 0; i < res.length - 1; i++) {
-				if (res[i] > res[i + 1]) {
-					temp = res[i];
-					res[i] = res[i + 1];
-					res[i + 1] = temp;
-					unsorted = true;
+		int res[] = array;
+		if (isSorted(array)) {
+
+		} else {
+			boolean unsorted = true;
+			int temp;
+			while (unsorted) {
+				unsorted = false;
+				for (int i = 0; i < res.length - 1; i++) {
+					if (res[i] > res[i + 1]) {
+						temp = res[i];
+						res[i] = res[i + 1];
+						res[i + 1] = temp;
+						unsorted = true;
+					}
 				}
 			}
-		}}
-	
+		}
+
 		return res;
 	}
+
 	public static boolean isSorted(int[] array) {
 		boolean res = true;
 		for (int i = 0; i < array.length - 2; i++) {
@@ -134,5 +137,31 @@ public class MyArrays {
 			}
 		}
 		return res;
+	}
+
+	static public boolean isSum2(short array[], short sum) {
+		boolean res = false;
+		int max = findMax(array);
+		boolean dictionary[] = new boolean[max+1];
+		for (int i = 0; i < array.length; i++) {
+			dictionary[array[i]] = true;
+		}
+		for (int i = 0; i < array.length; i++) {
+			if (sum - array[i] < max && sum - array[i] >= 0 && dictionary[sum - array[i]] == true) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+
+	static public int findMax(short array[]) {
+		int max = array[0];
+		for (int i = 0; i < array.length; i++) {
+			if (max < array[i]) {
+				max = array[i];
+			}
+		}
+		return max;
 	}
 }
