@@ -53,4 +53,23 @@ public class Strings {
 			}
 		}
 	}
+
+	public static String javaNameExp() {
+		return "[a-zA-Z$][\\w$]*|_[\\w$]+";
+	}
+
+	public static String ipV4Octet() {
+		return "(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])";
+	}
+
+	public static String ipV4() {
+		short number = 4;
+		String res = "";
+		int i=0;
+		while(i<number - 1) {
+			res += ipV4Octet() + "\\.";
+			i++;
+		}
+		return res + ipV4Octet();
+	}
 }
