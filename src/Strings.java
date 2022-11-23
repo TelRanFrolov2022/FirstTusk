@@ -9,18 +9,25 @@ public class Strings {
 	 */
 	public static boolean isAnagram(String str1, String str2) {
 		int logicSch = 0;
+		boolean res=false;
 		int lenght1 = str1.length();
+		
 		if (lenght1 == str2.length()) {
-			int[] charCounter = new int[Character.MAX_VALUE];
+			int[] count = new int[Character.MAX_VALUE];
 			for (int i = 0; i < lenght1; i++) {
-				charCounter[(int) str1.charAt(i)]++;
-				charCounter[(int) str2.charAt(i)]--;
+				count[(int) str1.charAt(i)]++;
+				count[(int) str2.charAt(i)]--;
 			}
-			while (logicSch < charCounter.length && charCounter[logicSch] == 0) {
+			while (logicSch < count.length && count[logicSch] == 0) {
 				logicSch++;
 			}
 		}
-		return logicSch == Character.MAX_VALUE ? true : false;
+		
+		if(logicSch==Character.MAX_VALUE) {
+			res=true;
+		}
+		
+		return res;
 	}
 
 	/**
@@ -29,20 +36,20 @@ public class Strings {
 	 * @param arrayOfStrings
 	 */
 	public static void sortStringNumbers(String[] arrayOfStrings) {
-		short offset = Byte.MAX_VALUE + 1;
-		int[] helper = new int[offset * 2];
-		int j = 0;
+		int sch = 0;
 		int index = 0;
+		short n = Byte.MAX_VALUE + 1;
+		int[] helper = new int[n * 2];
 		for (int i = 0; i < arrayOfStrings.length; i++) {
-			helper[Byte.parseByte(arrayOfStrings[i]) + offset]++;
+			helper[Byte.parseByte(arrayOfStrings[i]) + n]++;
 		}
 		while (index < arrayOfStrings.length) {
-			if (helper[j] == 0) {
-				j++;
+			if (helper[sch] == 0) {
+				sch++;
 			} else {
-				arrayOfStrings[index] = Integer.toString(j - offset);
+				arrayOfStrings[index] = Integer.toString(sch - n);
+				helper[sch]--;
 				index++;
-				helper[j]--;
 			}
 		}
 	}
