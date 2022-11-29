@@ -1,9 +1,10 @@
+package telran;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 
-class ObjTests {
+class StringsTest {
 
 	@Test
 	@Disabled
@@ -55,6 +56,37 @@ class ObjTests {
 		assertFalse("05.220.1310.100".matches(Strings.ipV4()));
 		assertFalse("777.7777.40.20".matches(Strings.ipV4()));;
 
+	}
+
+	@Test
+	void operandTest() {
+		String[] rightOperands = { "40", "25.9", ".7", "num", "g124" };
+		String[] wrongOperands = { "-0356", "25.9", ".767898.", "145num", "__" };
+
+		for (int i = 0; i < rightOperands.length; i++) {
+			assertTrue(rightOperands[i].matches(Strings.operand()));
+			assertFalse(wrongOperands[i].matches(Strings.operand()));
+		}
+	}
+
+	@Test
+	void checkBracesTest() {
+		String[] rightExpressions = { "()()(())", "((()))", "()(()())" };
+		String[] wrongExpressions = { "()()(()", "()(()()", "(()()())())" };
+		for (int i = 0; i < rightExpressions.length; i++) {
+			assertTrue(Strings.checkBraces(rightExpressions[i]));
+			assertFalse(Strings.checkBraces(wrongExpressions[i]));
+		}
+	}
+
+	@Test
+	void computeExpressionTest() {
+		assertEquals(10.5, Strings.computeArithmenticExpression("2 + 2 + 1 * 2 + 0.5", null, null));
+		assertTrue(Double.isNaN(Strings.computeArithmenticExpression("2 # 2 ++ 10", null, null)));
+		assertEquals(10.5, Strings.computeArithmenticExpression("a + 2 + c * 2 + 0.5", new double[] {2, 1},
+				new String[] {"a", "c"}));
+		assertTrue(Double.isNaN(Strings.computeArithmenticExpression("a + 2 + c * 2 + d23", new double[] {2, 1},
+				new String[] {"a", "c"})));
 	}
 
 }
